@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:48:47 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/07 15:50:06 by skhali           ###   ########.fr       */
+/*   Updated: 2023/07/07 20:12:06 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,28 @@
 # include <readline/history.h>
 # include "libft.h"
 
+
+typedef struct s_heredoc
+{
+	char	*filename;
+	char	*file;
+}	t_heredoc;
+
+typedef s_commande{
+	char *cmd;
+	char		**cmds_split;
+	int			id;
+	t_heredoc	*hd;
+	t_command	*next;
+}	t_commande;
+
+struct s_partition
+{
+	t_command	*cmds;
+	int			pid;
+	t_partition	*next;
+};
+
+t_list *initialized_env(char **env);
 
 #endif
