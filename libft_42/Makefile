@@ -6,7 +6,7 @@
 #    By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 16:45:59 by kyacini           #+#    #+#              #
-#    Updated: 2022/12/21 18:12:22 by kyacini          ###   ########.fr        #
+#    Updated: 2022/05/11 18:28:11 by kyacini          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,9 +45,7 @@ SRC = ft_memset.c \
 		ft_strmapi.c \
 		ft_strcmp.c \
 		ft_strrejoin.c \
-		ft_strcat.c \
-		ft_realloc.c \
-		ft_power2.c
+		ft_strcat.c
 
 BONUS = ft_lstnew.c \
 		ft_lstadd_front.c \
@@ -56,7 +54,8 @@ BONUS = ft_lstnew.c \
 		ft_lstadd_back.c \
 		ft_lstdelone.c \
 		ft_lstclear.c \
-		ft_lstiter.c
+		ft_lstiter.c \
+		ft_lstmap.c
 
 NAME = libft.a
 
