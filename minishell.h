@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:48:47 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/07 20:12:06 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/07/07 21:54:01 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@ typedef struct s_heredoc
 	char	*file;
 }	t_heredoc;
 
-typedef s_commande{
+typedef struct s_commande{
 	char *cmd;
 	char		**cmds_split;
 	int			id;
 	t_heredoc	*hd;
-	t_command	*next;
+	struct s_commande	*next;
 }	t_commande;
 
-struct s_partition
+typedef struct s_partition
 {
-	t_command	*cmds;
+	t_commande	*cmds;
 	int			pid;
-	t_partition	*next;
-};
+	struct s_partition	*next;
+} t_partition;
 
 t_list *initialized_env(char **env);
 
