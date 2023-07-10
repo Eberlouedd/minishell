@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:59:58 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/07 19:17:57 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/07/08 17:06:40 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			*ft_memmove(void *destination, const void *source, size_t size);
 void			*ft_memset(void *pointer, int value, size_t count);
 char			*ft_strchr( const char *string, int searchedChar);
 char			*ft_strdup(char *src);
-char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin(char *s1, char *s2);
 unsigned int	ft_strlcat(char *dest, const char *src, unsigned int size);
 char			*ft_strtrim(char const *s1, char const *set);
 unsigned int	ft_strlcpy(char *dest, const char *src,
