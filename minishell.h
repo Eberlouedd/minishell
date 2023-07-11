@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:48:47 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/09 17:19:02 by skhali           ###   ########.fr       */
+/*   Updated: 2023/07/11 13:19:57 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # define L_DIR 2;
 # define RD_DIR 3;
 # define LD_DIR 4;
-
 
 typedef struct s_heredoc
 {
@@ -59,5 +58,9 @@ void	ft_lstadd_backcmd(t_commande **lst, t_commande *new);
 t_commande	*ft_lstlastcmd(t_commande *lst);
 char *create_word(char **str, int *tab);
 int *create_type_table(char **div, int *tab);
+int *single_quote_gestion(char *str);
+int *double_quote_gestion(char *str);
+int check_unique(char *str);
+char	*first_transformation(char *commande);
 
 #endif

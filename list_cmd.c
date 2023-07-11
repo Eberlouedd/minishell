@@ -27,6 +27,7 @@ t_commande *create_lstcmd(char *str)
             ft_lstadd_backcmd(&c, ft_lst_newcmd(div[i], 4));
         i++;
     }
+    // il faudra free div
     free(tab);
     return(c);
 }
