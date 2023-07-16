@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:15:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/11 13:45:34 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/07/16 02:20:26 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ char	*first_transformation(char *commande)
 	char *new;
 	int i;
 	
-
 	i = 0;
 	if(ft_strcmp(commande,"") == 0)
 		return "";
@@ -127,19 +126,6 @@ char	*first_transformation(char *commande)
 		printf("error\n");
 		return("");
 	}
-	parse_quotes(commande);
-	add_spaces(commande);
+	commande = add_spaces(commande, create_quote_rep(commande));
 	return (commande);
 }
-
-
-	// while(commande[i + 1])
-	// {
-	// 	if((commande[i] == '<' || commande[i] == '>') && commande[i + 1] != '>' && commande[i + 1] != '<')
-	// 		break;
-	// 	if((commande[i] == '<' || commande[i] == '>') && (commande[i + 1] == '>' || commande[i + 1] == '<'))
-	// 	{
-	// 		i++;
-	// 		break;
-	// 	}
-	// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:48:47 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/11 13:19:57 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/07/16 00:55:10 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,7 @@ int *single_quote_gestion(char *str);
 int *double_quote_gestion(char *str);
 int check_unique(char *str);
 char	*first_transformation(char *commande);
+int *create_quote_rep(char *str);
+char *add_spaces(char *str, int *quotes);
 
 #endif
