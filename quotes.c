@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:15:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/20 04:49:43 by skhali           ###   ########.fr       */
+/*   Updated: 2023/07/20 17:50:25 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,62 +53,6 @@ int test_quotes(char *str)
 	return (1);
 }
 
-int *double_quote_gestion(char *str)
-{
-	int *tab_double_quote;
-	int c;
-	int i;
-
-	i = 0;
-	c = 0;
-	while (str[i])
-	{
-		if(str[i] == '\"')
-			c++;
-		i++;
-	}
-	tab_double_quote = malloc(c * sizeof(int));
-	i = 0;
-	c = 0;
-	while (str[i])
-	{
-		if(str[i] == '\"')
-		{
-			tab_double_quote[c] = i;
-			c++;
-		}
-	}
-	return (tab_double_quote);
-}
-
-int *single_quote_gestion(char *str)
-{
-	int *tab_single_quote;
-	int c;
-	int i;
-
-	i = 0;
-	c = 0;
-	while (str[i])
-	{
-		if(str[i] == '\"')
-			c++;
-		i++;
-	}
-	tab_single_quote = malloc(c * sizeof(int));
-	i = 0;
-	c = 0;
-	while (str[i])
-	{
-		if(str[i] == '\"')
-		{
-			tab_single_quote[c] = i;
-			c++;
-		}
-	}
-	return (tab_single_quote);
-}
-
 char	*first_transformation(char *commande)
 {
 	char *new;
@@ -126,6 +70,6 @@ char	*first_transformation(char *commande)
 		printf("error\n");
 		return("");
 	}
-	commande = add_spaces(commande, create_quote_rep(commande));
+	commande = add_spaces(commande);
 	return (commande);
 }

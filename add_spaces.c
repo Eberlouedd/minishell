@@ -64,22 +64,19 @@ char *add_final(char *str, int *tab, int size)
     char *ret;
     int i;
     int c;
-    int j;
-    int b;
+    int j; 
 
     i = 0;
     c = 0;
     j = 0;
-    b = 0;
     ret = malloc((ft_strlen(str) + size + 1) * sizeof(int));
     ret[ft_strlen(str) + size] = '\0';
     while(ret[i])
     {
-        if (i == tab[c] + b && c < size)
+        if (i == tab[c]&& c < size)
         {
             ret[i] = ' ';
             c++;
-            b++;
         }
         else
         {
@@ -92,20 +89,22 @@ char *add_final(char *str, int *tab, int size)
     return(ret);
 }
 
-char *add_spaces(char *str, int *quotes)
+char *add_spaces(char *str)
 {
 	int i;
     int *tab_spaces;
+    int *quotes;
     int c;
 
 	i = 1;
     c = 0;
+    quotes = create_quote_rep(str);
 	while (str[i + 1])
 	{
 		if((str[i] == '>'
         || str[i] == '<') && str[i+1] != '>' && str[i+1] != '<'
         && quotes[i] != 0
-        && str[i - 1] != ' ' && str[i + 1] != ' ')
+        && str[i - 1] != ' ')
         {
             tab_spaces =  create_add_space(tab_spaces, i, c);
             c++;
@@ -121,6 +120,7 @@ char *add_spaces(char *str, int *quotes)
     {
         str = add_final(str, tab_spaces, c);
         free(tab_spaces);
+        free(quotes);
     }
     return(str);
 }
