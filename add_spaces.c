@@ -73,7 +73,7 @@ char *add_final(char *str, int *tab, int size)
     ret[ft_strlen(str) + size] = '\0';
     while(ret[i])
     {
-        if (i == tab[c]&& c < size)
+        if (tab[i] == 1)
         {
             ret[i] = ' ';
             c++;
@@ -106,15 +106,8 @@ char *add_spaces(char *str)
         && quotes[i] != 0
         && str[i - 1] != ' ')
         {
-            tab_spaces =  create_add_space(tab_spaces, i, c);
-            c++;
-            if(str[i + 1] != ' ')
-            {
-                tab_spaces =  create_add_space(tab_spaces, i + 1, c);
-                c++;
-            }
+            // a faire
         }
-        i++;
 	}
     if (c > 0)
     {
