@@ -6,7 +6,7 @@
 /*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:48:47 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/16 00:55:10 by skhali           ###   ########.fr       */
+/*   Updated: 2023/07/20 04:41:09 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ int check_unique(char *str);
 char	*first_transformation(char *commande);
 int *create_quote_rep(char *str);
 char *add_spaces(char *str, int *quotes);
+char *supp_quotes(char *str);
 
 #endif

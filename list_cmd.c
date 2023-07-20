@@ -8,6 +8,7 @@ t_commande *create_lstcmd(char *str)
     t_commande *c;
 
 	i = 0;
+    printf("%s\n", str);
 	div = ft_split(str, ' ');
 	while(div[i])
 		i++;
@@ -17,6 +18,7 @@ t_commande *create_lstcmd(char *str)
     i = 0;
     while(div[i])
     {
+        div[i] = supp_quotes(div[i]);
         if(tab[i] == 1)
             ft_lstadd_backcmd(&c, ft_lst_newcmd(div[i], 1));
         else if(tab[i] == 2)
@@ -56,7 +58,7 @@ char *create_word(char **str, int *tab)
     {
         if(tab[i] == 0)
         {
-            word = ft_strjoin(word, str[i]);
+            word = ft_strjoin(word, supp_quotes(str[i]));
             word = ft_strjoin(word, " ");
         }
         i++;

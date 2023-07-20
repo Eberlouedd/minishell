@@ -100,14 +100,12 @@ char *add_spaces(char *str, int *quotes)
 
 	i = 1;
     c = 0;
-
 	while (str[i + 1])
 	{
-		if(str[i] == '>'
-        || str[i] == '<' && str[i+1] != '>'
-        && str[i+1] != '<'
+		if((str[i] == '>'
+        || str[i] == '<') && str[i+1] != '>' && str[i+1] != '<'
         && quotes[i] != 0
-        && str[i - 1] != ' ')
+        && str[i - 1] != ' ' && str[i + 1] != ' ')
         {
             tab_spaces =  create_add_space(tab_spaces, i, c);
             c++;

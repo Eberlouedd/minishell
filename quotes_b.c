@@ -6,7 +6,7 @@
 /*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:24:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/16 00:49:35 by skhali           ###   ########.fr       */
+/*   Updated: 2023/07/20 06:01:15 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,24 @@ int check_unique(char *str)
 	return 1;
 }
 
+char *supp_quotes(char *str)
+{
+	char *new;
+	int i;
+	int c;
+
+	i = 1;
+	c = 0;
+	if (str[ft_strlen(str) - 1] != '\'' && str[ft_strlen(str) - 1] != '\"')
+			return(str);
+	new = malloc(ft_strlen(str) - 1);
+	new[ft_strlen(str) - 2] = '\0';
+	while(str[i + 1])
+	{
+		new[c] = str[i];
+		c++;
+		i++;
+	}
+	free(str);
+	return(new);
+}
