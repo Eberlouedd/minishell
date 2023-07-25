@@ -6,7 +6,7 @@
 /*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:24:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/20 06:01:15 by skhali           ###   ########.fr       */
+/*   Updated: 2023/07/24 20:43:40 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,53 @@ int check_unique(char *str)
 	return 1;
 }
 
+int have_quotes(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i])
+	{
+		if(str[i] == '\'' || str[i] == '\"')
+			return(1);
+		i++;
+	}
+	return(0);
+}
+
 char *supp_quotes(char *str)
 {
 	char *new;
 	int i;
 	int c;
+	int *quotes;
 
-	i = 1;
+
+	i = 0;
 	c = 0;
-	if (str[ft_strlen(str) - 1] != '\'' && str[ft_strlen(str) - 1] != '\"')
-			return(str);
-	new = malloc(ft_strlen(str) - 1);
-	new[ft_strlen(str) - 2] = '\0';
-	while(str[i + 1])
+	if (!have_quotes(str))
+			return(ft_strdup(str));
+	quotes = create_quote_rep(str);
+	while(i < ft_strlen(str))
 	{
-		new[c] = str[i];
-		c++;
+		if(quotes[i] == 2)
+			c++;
+		i++;
+	}
+	new = malloc(ft_strlen(str) - c + 1);
+	new[ft_strlen(str) - c] = '\0';
+	i = 0;
+	c = 0;
+	while(str[i])
+	{
+		if(quotes[i] != 2)
+		{
+			new[c] = str[i];
+			c++;
+		}
 		i++;
 	}
 	free(str);
+	free(quotes);
 	return(new);
 }

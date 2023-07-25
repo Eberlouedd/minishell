@@ -16,22 +16,22 @@ int *create_quote_rep(char *str)
         if(str[i] == '\"' && switch_b && !switch_a)
         {
             switch_b = 0;
-            ret[i] = 1;
+            ret[i] = 2;
         }
         else if(str[i] == '\"' && !switch_b && !switch_a)
         {
             switch_b = 1;
-            ret[i] = 1;
+            ret[i] = 2;
         }
         else if(str[i] == '\'' && switch_a && !switch_b)
         {
             switch_a = 0;
-            ret[i] = 1;
+            ret[i] = 2;
         }
         else if(str[i] == '\'' && !switch_a && !switch_b)
         {
             switch_a = 1;
-            ret[i] = 1;
+            ret[i] = 2;
         }
         else if(switch_a || switch_b)
             ret[i] = 0;
@@ -61,32 +61,27 @@ int *create_add_space(int *tab, int position, int size)
 
 char *add_final(char *str, int *tab, int size)
 {
-    char *ret;
+    char *new;
     int i;
-    int c;
     int j; 
 
     i = 0;
-    c = 0;
     j = 0;
-    ret = malloc((ft_strlen(str) + size + 1) * sizeof(int));
-    ret[ft_strlen(str) + size] = '\0';
-    while(ret[i])
+    new = malloc((size + 1) * sizeof(int));
+    new[size] = '\0';
+    while(i < size)
     {
         if (tab[i] == 1)
-        {
-            ret[i] = ' ';
-            c++;
-        }
+            new[i] = ' ';
         else
         {
-            ret[i] = str[j];
+            new[i] = str[j];
             j++;
         }
         i++;
     }
     free(str);
-    return(ret);
+    return(new);
 }
 
 char *add_spaces(char *str)
@@ -96,18 +91,28 @@ char *add_spaces(char *str)
     int *quotes;
     int c;
 
-	i = 1;
+	i = 0;
     c = 0;
     quotes = create_quote_rep(str);
-	while (str[i + 1])
+    tab_spaces = malloc(1 * sizeof(int));
+    tab_spaces[0] = 0;
+	while (str[i])
 	{
 		if((str[i] == '>'
         || str[i] == '<') && str[i+1] != '>' && str[i+1] != '<'
         && quotes[i] != 0
-        && str[i - 1] != ' ')
+        && str[i + 1] != ' '
+        || ((str[i + 1] == '>' || str[i + 1] == '<') && str[i] != '>'
+        && str[i] != '<' && str[i] != ' ' && quotes[i + 1] != 0))
         {
-            // a faire
+            tab_spaces = create_add_space(tab_spaces, 0, c);
+            c++;
+            tab_spaces = create_add_space(tab_spaces, 1, c);
         }
+        else
+            tab_spaces = create_add_space(tab_spaces, 0, c);
+        i++;
+        c++;
 	}
     if (c > 0)
     {
@@ -115,5 +120,5 @@ char *add_spaces(char *str)
         free(tab_spaces);
         free(quotes);
     }
-    return(str);
+    return(ft_strdup(str));
 }

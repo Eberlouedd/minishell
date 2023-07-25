@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:42:35 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/20 17:49:51 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/07/24 21:19:21 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,11 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		commande = readline("minishell> ");
-		// commande = first_transformation(commande);
-		commande = add_spaces(commande);
-		printf("%s\n", commande);
+		commande = first_transformation(commande);
 		if (!commande)
 			break ;
-		// afflist(parsing(commande));
+		add_history(commande);
+		afflist(parsing(commande));
 	}
 	ft_lstclear(&var_env, free);
 	free_double_char(path);

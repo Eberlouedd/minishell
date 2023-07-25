@@ -18,18 +18,17 @@ t_commande *create_lstcmd(char *str)
     i = 0;
     while(div[i])
     {
-        div[i] = supp_quotes(div[i]);
         if(tab[i] == 1)
-            ft_lstadd_backcmd(&c, ft_lst_newcmd(div[i], 1));
+            ft_lstadd_backcmd(&c, ft_lst_newcmd(supp_quotes(div[i]), 1));
         else if(tab[i] == 2)
-            ft_lstadd_backcmd(&c, ft_lst_newcmd(div[i], 2));
+            ft_lstadd_backcmd(&c, ft_lst_newcmd(supp_quotes(div[i]), 2));
         else if(tab[i] == 3)
-            ft_lstadd_backcmd(&c, ft_lst_newcmd(div[i], 3));
+            ft_lstadd_backcmd(&c, ft_lst_newcmd(supp_quotes(div[i]), 3));
         else if(tab[i] == 4)
-            ft_lstadd_backcmd(&c, ft_lst_newcmd(div[i], 4));
+            ft_lstadd_backcmd(&c, ft_lst_newcmd(supp_quotes(div[i]), 4));
         i++;
     }
-    // il faudra free div
+    free_double_char(div);
     free(tab);
     return(c);
 }
@@ -37,13 +36,14 @@ t_commande *create_lstcmd(char *str)
 t_commande *ft_lst_newcmd(char *cmd, int id)
 {
     t_commande *c;
-	
+
 	c = malloc(sizeof(t_commande));
-	if (!c)
+	if (!c || !cmd)
 		return (NULL);
-	c->cmd= cmd;
+    c->cmd= cmd;
     c->id = id;
     c->cmds_split = ft_split(cmd, ' ');
+    c->next = NULL;
 	return (c);
 }
 
@@ -63,7 +63,8 @@ char *create_word(char **str, int *tab)
         }
         i++;
     }
-    word = ft_substr(word, 0, ft_strlen(word) - 1);
+    if (word)
+        word = ft_substr(word, 0, ft_strlen(word) - 1);
     return(word);
 }
 
