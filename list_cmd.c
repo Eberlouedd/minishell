@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_cmd.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/15 16:22:21 by kyacini           #+#    #+#             */
+/*   Updated: 2023/08/15 16:32:10 by kyacini          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_commande *create_lstcmd(char *str)
@@ -10,6 +22,7 @@ t_commande *create_lstcmd(char *str)
 	i = 0;
     printf("%s\n", str);
 	div = ft_split(str, ' ');
+    clean_del(div);
 	while(div[i])
 		i++;
 	tab = malloc(i * sizeof(int));

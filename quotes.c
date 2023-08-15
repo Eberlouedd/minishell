@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:15:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/24 21:42:47 by skhali           ###   ########.fr       */
+/*   Updated: 2023/08/15 18:21:54 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,43 @@ int test_quotes(char *str)
 	return (1);
 }
 
-char	*first_transformation(char *commande)
+void splitable(char *str)
+{
+	int i;
+	int *tab;
+
+	i = 0;
+	tab = create_quote_rep(str);
+	while(str[i])
+	{
+		if(str[i] == ' ' && tab[i] == 0)
+			str[i] = (char) 177;
+		i++;
+	}
+	free(tab);
+}
+
+void clean_del(char **str)
+{
+	int i;
+	int c;
+
+	i = 0;
+	c = 0;
+	while(str[i])
+	{
+		while(str[i][c])
+		{
+			if(str[i][c] == (char) 177)
+				str[i][c] = ' ';
+			c++;
+		}
+		c = 0;
+		i++;
+	}
+}
+
+char	*first_transformation(char *commande, t_list *var_env)
 {
 	char *new;
 	int i;
@@ -71,9 +107,9 @@ char	*first_transformation(char *commande)
 		return("");
 	}
 	commande = add_spaces(commande);
+	commande = illuminate_variables(commande, var_env);
+	splitable(commande);
 	return (commande);
 }
 
-
-// split quote
 // $ variable

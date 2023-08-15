@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:48:47 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/24 18:52:31 by skhali           ###   ########.fr       */
+/*   Updated: 2023/08/15 18:20:34 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,12 @@ t_commande	*ft_lstlastcmd(t_commande *lst);
 char *create_word(char **str, int *tab);
 int *create_type_table(char **div, int *tab);
 int check_unique(char *str);
-char	*first_transformation(char *commande);
+char	*first_transformation(char *commande, t_list *var_env);
 int *create_quote_rep(char *str);
 char *add_spaces(char *str);
 char *supp_quotes(char *str);
 int	afflistc(t_commande *var_env);
+void clean_del(char **str);
+char *illuminate_variables(char *str, t_list *var_env);
 
 #endif
