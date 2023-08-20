@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:59:08 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/15 18:52:16 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/20 13:24:47 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,40 +22,73 @@ char *char_to_string(char c)
 	return (string);
 }
 
-char *variable(char *str, int i)
+void variable(char *str, int i, char **new)
 {
 	int c;
-	static char *string = NULL;
 
-	c = 0;
-	while((ft_isalpha(str[i + c]) || str[i + c] == '_') && str[i + c])
+	c = 1;
+	while(str[i + c] && (ft_isalpha(str[i + c]) || str[i + c] == '_'))
 	{
-		string = ft_strjoin(string, char_to_string(str[i + c]));
-		printf("%s\n", string);
+		*new = ft_strjoin(*new, char_to_string(str[i + c]));
 		c++;
 	}
-	string = ft_strjoin(string, " ");
-	return string;
+	*new = ft_strjoin(*new, " ");
 }
 
-char *illuminate_variables(char *str, t_list *var_env)
+char **stock_variables(char *str)
 {
 	int *tab;
 	char *string;
 	int i;
 	char **variables;
-	char *new;
 
+	string = NULL;
+	variables = NULL;
 	tab = create_quote_rep(str);
 	i = 0;
 	while (str[i])
 	{
 		if(str[i] == '$')
-			string = variable(str, i);
+			variable(str, i, &string);
 		i++;
 	}
-	variables = ft_split(string, ' ');
-	printf("%s\n", variables[0]);
-	printf("%s\n", variables[1]);
-	return string;
+	if (string)
+		variables = ft_split(string, ' ');
+	return (variables);
+}
+
+int count_char(char **vars, t_list *var_env)
+{
+	int res;
+	int i;
+	t_list *buff;
+
+	i = 0;
+	res = 0;
+	buff = var_env;
+	while (vars)
+	{
+		while(var_env)
+		{
+			if(vars[i] == var_env->name)
+				res += ft_strlen(var_env->content);
+			var_env = var_env->next;
+		}
+		var_env = buff;
+		i++;
+	}
+	return res;
+}
+
+char *illuminate_variables(char *str, t_list *var_env, char **vars)
+{
+	char *new;
+
+	if(!vars)
+		return(ft_strdup(str));
+	while (vars)
+	{
+
+	}
+
 }
