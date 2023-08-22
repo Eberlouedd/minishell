@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_spaces.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:22:37 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/15 16:22:39 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/22 01:48:49 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int *create_quote_rep(char *str)
         if(str[i] == '\"' && switch_b && !switch_a)
         {
             switch_b = 0;
-            ret[i] = 2;
+            ret[i] = 3;
         }
         else if(str[i] == '\"' && !switch_b && !switch_a)
         {
             switch_b = 1;
-            ret[i] = 2;
+            ret[i] = 3;
         }
         else if(str[i] == '\'' && switch_a && !switch_b)
         {

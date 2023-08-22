@@ -6,7 +6,7 @@
 /*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:24:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/24 20:43:40 by skhali           ###   ########.fr       */
+/*   Updated: 2023/08/22 02:12:22 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ int check_unique(char *str)
 		i++;
 	}
 	if(c % 2 != 0 && last_quote(str) == '\'')
+	{
+		printf("non");
 		return 0;
+	}
 	i = 0;
 	c = 0;
 	while (str[i])

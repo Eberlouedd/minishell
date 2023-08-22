@@ -6,7 +6,7 @@
 /*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:59:58 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/08 17:06:16 by skhali           ###   ########.fr       */
+/*   Updated: 2023/08/22 02:11:43 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 typedef struct s_list
 {
-	void			*content;
-	void			*name;
+	char			*content;
+	char			*name;
 	struct s_list	*next;
 }	t_list;
 int				ft_atoi(const char *nptr);

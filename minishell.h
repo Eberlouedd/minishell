@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:48:47 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/20 12:45:48 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/21 22:54:15 by skhali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ char *supp_quotes(char *str);
 int	afflistc(t_commande *var_env);
 void clean_del(char **str);
 char **stock_variables(char *str);
+char *illuminate_variables(char *str, t_list *var_env, char **vars);
 
 #endif
