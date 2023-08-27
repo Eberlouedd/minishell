@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:15:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/22 02:25:43 by skhali           ###   ########.fr       */
+/*   Updated: 2023/08/25 09:02:04 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,7 @@ char	*first_transformation(char *commande, t_list *var_env)
 		return("");
 	}
 	commande = add_spaces(commande);
-	printf("%s\n", illuminate_variables(commande, var_env, stock_variables(commande)));
+	commande = illuminate_variables(commande, var_env, stock_variables(commande));
 	splitable(commande);
 	return (commande);
 }
-
-// $ variable

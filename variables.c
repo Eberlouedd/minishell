@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:59:08 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/22 02:25:16 by skhali           ###   ########.fr       */
+/*   Updated: 2023/08/27 04:18:09 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,27 @@ char *char_to_string(char c)
 	return (string);
 }
 
-void variable(char *str, int i, char **new)
+void variable(char *str, int *i, char **new)
 {
 	int c;
 
 	c = 1;
-	while(str[i + c] && (ft_isalpha(str[i + c]) || str[i + c] == '_'))
+	if (!str[*i + c])
+		return ;
+	if  (str[*i + c] == '$')
 	{
-		*new = ft_strjoin(*new, char_to_string(str[i + c]));
-		c++;
+		*new = ft_strjoin(*new, "$ ");
+		*i = *i + 1;
 	}
-	*new = ft_strjoin(*new, " ");
+	else
+	{
+		while(str[*i + c] && (ft_isalpha(str[*i + c]) || str[*i + c] == '_'))
+		{
+			*new = ft_strjoin(*new, char_to_string(str[*i + c]));
+			c++;
+		}
+		*new = ft_strjoin(*new, " ");
+	}
 }
 
 int kind_of_quote(char *str, int j)
@@ -66,7 +76,7 @@ char **stock_variables(char *str)
 	while (str[i])
 	{
 		if(str[i] == '$' && kind_of_quote(str, i) != 2)
-			variable(str, i, &string);
+			variable(str, &i, &string);
 		i++;
 	}
 	if (string)
@@ -87,11 +97,16 @@ int count_char(char **vars, t_list *var_env)
 	buff = var_env;
 	while (vars[i])
 	{
-		while(var_env)
+		if (!ft_strcmp(vars[i], "$"))
+			res += ft_strlen(ft_itoa(getpid()));
+		else
 		{
-			if(!ft_strcmp(vars[i],var_env->name))
-				res += ft_strlen(var_env->content);
-			var_env = var_env->next;
+			while(var_env)
+			{
+				if(!ft_strcmp(vars[i],var_env->name))
+					res += ft_strlen(var_env->content);
+				var_env = var_env->next;
+			}
 		}
 		var_env = buff;
 		len_var += ft_strlen(vars[i]) + 1;
@@ -100,11 +115,23 @@ int count_char(char **vars, t_list *var_env)
 	return res - len_var;
 }
 
-void *replace_content(char *var, t_list *var_env, char *new, int *i)
+void replace_content(char *var, t_list *var_env, char *new, int *i)
 {
 	int c;
+	char *pid;
 
 	c = 0;
+	pid = ft_itoa(getpid());
+	if (!ft_strcmp(var, "$"))
+	{
+		while(pid[c])
+		{
+			new[*i + c] = pid[c];
+			c++;
+		}
+		*i = *i + c - 1;
+		return ;
+	}
 	while(var_env)
 	{
 		if(!ft_strcmp(var,var_env->name))
