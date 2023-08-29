@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:42:35 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/25 09:02:37 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/28 22:38:48 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,22 @@ int	main(int argc, char **argv, char **env)
 	char	*commande;
 	t_list	*var_env;
 	char **path;
+	t_partition *parse_result;
 	
 	var_env = initialized_env(env);
 	path = ft_split(env[30], ':');
 	while (1)
 	{
 		commande = readline("minishell> ");
-		if (!commande)
+		if (!ft_strcmp(commande, "oui"))
 			break ;
 		add_history(commande);
 		commande = first_transformation(commande, var_env);
-		printf("%s\n", commande);
-		// afflist(parsing(commande));
+		parse_result = parsing(commande);
 	}
+	free(commande);
 	ft_lstclear(&var_env, free);
 	free_double_char(path);
+	free_parsing(&parse_result);
 	return (0);
 }

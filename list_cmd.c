@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:22:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/15 16:32:10 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/28 23:29:51 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_commande *create_lstcmd(char *str)
     t_commande *c;
 
 	i = 0;
-    printf("%s\n", str);
 	div = ft_split(str, ' ');
     clean_del(div);
 	while(div[i])
@@ -41,7 +40,7 @@ t_commande *create_lstcmd(char *str)
             ft_lstadd_backcmd(&c, ft_lst_newcmd(supp_quotes(div[i]), 4));
         i++;
     }
-    free_double_char(div);
+    free(div);
     free(tab);
     return(c);
 }
@@ -53,7 +52,7 @@ t_commande *ft_lst_newcmd(char *cmd, int id)
 	c = malloc(sizeof(t_commande));
 	if (!c || !cmd)
 		return (NULL);
-    c->cmd= cmd;
+    c->cmd = cmd;
     c->id = id;
     c->cmds_split = ft_split(cmd, ' ');
     c->next = NULL;

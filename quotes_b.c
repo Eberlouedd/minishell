@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes_b.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:24:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/22 02:12:22 by skhali           ###   ########.fr       */
+/*   Updated: 2023/08/28 23:29:40 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int check_unique(char *str)
 	int i;
 	int c;
 
+	i = 0;
+	c = 0;
 	while (str[i])
 	{
 		if(str[i] == '\'')
@@ -40,10 +42,7 @@ int check_unique(char *str)
 		i++;
 	}
 	if(c % 2 != 0 && last_quote(str) == '\'')
-	{
-		printf("non");
 		return 0;
-	}
 	i = 0;
 	c = 0;
 	while (str[i])
@@ -103,7 +102,7 @@ char *supp_quotes(char *str)
 		}
 		i++;
 	}
-	free(str);
 	free(quotes);
+	free(str);
 	return(new);
 }

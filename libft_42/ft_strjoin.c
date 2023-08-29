@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:53:03 by kyacini           #+#    #+#             */
-/*   Updated: 2023/07/08 18:47:24 by skhali           ###   ########.fr       */
+/*   Updated: 2023/08/28 21:27:32 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	if (!s1)
-		return (s2);
+		return (ft_strdup(s2));
 	new_chain = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!new_chain)
 		return (NULL);
@@ -37,5 +37,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 		j++;
 	}
-	return (new_chain);
+	return (free(s1), new_chain);
 }

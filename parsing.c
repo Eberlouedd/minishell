@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:22:50 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/15 16:22:52 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/28 23:37:38 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ t_partition *parsing(char *line)
         return (NULL);
     partitions = ft_split(line, '|');
     part = create_partition(partitions);
+    free_double_char(partitions);
     return (part);
 }

@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:59:08 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/27 04:18:09 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/28 22:30:12 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int kind_of_quote(char *str, int j)
 			j++;
 		}
 	}
+	free(tab);
 	return (0);
 }
 
@@ -71,7 +72,6 @@ char **stock_variables(char *str)
 
 	string = NULL;
 	variables = NULL;
-	tab = create_quote_rep(str);
 	i = 0;
 	while (str[i])
 	{
@@ -90,15 +90,18 @@ int count_char(char **vars, t_list *var_env)
 	int len_var;
 	int i;
 	t_list *buff;
+	char *pid;
 
 	i = 0;
 	res = 0;
 	len_var = 0;
 	buff = var_env;
+	pid = ft_itoa(getpid());
+
 	while (vars[i])
 	{
 		if (!ft_strcmp(vars[i], "$"))
-			res += ft_strlen(ft_itoa(getpid()));
+			res += ft_strlen(pid);
 		else
 		{
 			while(var_env)
@@ -112,6 +115,7 @@ int count_char(char **vars, t_list *var_env)
 		len_var += ft_strlen(vars[i]) + 1;
 		i++;
 	}
+	free(pid);
 	return res - len_var;
 }
 
@@ -146,6 +150,7 @@ void replace_content(char *var, t_list *var_env, char *new, int *i)
 		var_env = var_env->next;
 	}
 	*i = *i + c - 1;
+	free(pid);
 }
 
 
@@ -165,7 +170,7 @@ char *illuminate_variables(char *str, t_list *var_env, char **vars)
 	new[ft_strlen(str) + count_char(vars, var_env)] = '\0';
 	while (i < ft_strlen(str) + count_char(vars, var_env))
 	{
-		if(str[j] == '$' && kind_of_quote(str, j) != 2)
+		if(str[j] == '$' && kind_of_quote(str, j) != 2 && vars[c])
 		{
 			replace_content(vars[c], var_env, new, &i);
 			j += ft_strlen(vars[c]) + 1;
@@ -180,4 +185,28 @@ char *illuminate_variables(char *str, t_list *var_env, char **vars)
 	}
 	free(str);
 	return (ft_strdup(new));
+}
+
+void free_parsing(t_partition **partition)
+{
+	t_partition *buff;
+	t_commande *buff_cmd;
+
+	while ((*partition))
+	{
+		buff = (*partition)->next;
+		while((*partition)->cmds)
+		{
+			buff_cmd = (*partition)->cmds->next;
+			free((*partition)->cmds->cmd);
+			if((*partition)->cmds->cmds_split)
+				free_double_char((*partition)->cmds->cmds_split);
+			free((*partition)->cmds);
+			(*partition)->cmds = buff_cmd;
+		}
+		(*partition)->cmds = NULL;
+		free(*partition);
+		(*partition) = buff;
+	}
+	(*partition) = NULL;
 }
