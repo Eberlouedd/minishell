@@ -6,11 +6,36 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:53:03 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/28 21:27:32 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:50:57 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
+
+char	*ft_strdup2(char *src)
+{
+	char	*retour;
+	int		i;
+	int		taille;
+
+	taille = 0;
+	i = 0;
+	if (!src)
+		return (NULL);
+	while (src[taille])
+		taille++;
+	retour = malloc(sizeof(char) * (taille + 1));
+	if (!retour)
+		return (NULL);
+	while (src[i])
+	{
+		retour[i] = src[i];
+		i++;
+	}
+	retour[i] = '\0';
+	return (retour);
+}
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -21,11 +46,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	i = 0;
 	j = 0;
 	if (!s1)
-		return (ft_strdup(s2));
+		return (ft_strdup2(s2));
+	printf("test, buff [%s]", s2);
 	new_chain = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!new_chain)
 		return (NULL);
 	new_chain[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	printf("second buff [%s]\n", s2);
 	while (j < ft_strlen(s2) || (s2[0] == '\0' && j <= ft_strlen(s2)))
 	{
 		while (i < ft_strlen(s1))
@@ -37,5 +64,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 		j++;
 	}
-	return (free(s1), new_chain);
+	printf("third buff [%s]\n", s2);
+	free(s1);
+	return (new_chain);
 }

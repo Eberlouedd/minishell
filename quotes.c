@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:15:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/28 22:34:31 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:57:45 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,11 @@ char	*first_transformation(char *commande, t_list *var_env)
 		free(commande);
 		return("");
 	}
-	commande = add_spaces(commande);
-	vars = stock_variables(commande);
-	commande = illuminate_variables(commande, var_env, vars);
+	new = add_spaces(commande);
+	vars = stock_variables(new);
+	new = illuminate_variables(new, var_env, vars);
 	if (vars)
 		free_double_char(vars);
-	splitable(commande);
-	return (commande);
+	splitable(new);
+	return (new);
 }

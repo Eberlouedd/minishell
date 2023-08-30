@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:59:08 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/28 22:30:12 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:19:43 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,28 @@ char *char_to_string(char c)
 	string[0] = c;
 	string[1] = '\0';
 	return (string);
+}
+
+char *join_char(char *s1, char c)
+{
+	char	*new_chain;
+	int		i;
+
+	i = 0;
+	if (!s1)
+		return (char_to_string(c));
+	new_chain = malloc(ft_strlen(s1) + 1 + 1);
+	if (!new_chain)
+		return (NULL);
+	new_chain[ft_strlen(s1) + 1] = '\0';
+	while (i < ft_strlen(s1))
+	{
+		new_chain[i] = s1[i];
+		i++;
+	}
+	new_chain[i] = c;
+	free(s1);
+	return (new_chain);
 }
 
 void variable(char *str, int *i, char **new)
@@ -38,7 +60,7 @@ void variable(char *str, int *i, char **new)
 	{
 		while(str[*i + c] && (ft_isalpha(str[*i + c]) || str[*i + c] == '_'))
 		{
-			*new = ft_strjoin(*new, char_to_string(str[*i + c]));
+			*new = join_char(*new, str[*i + c]);
 			c++;
 		}
 		*new = ft_strjoin(*new, " ");
@@ -80,7 +102,10 @@ char **stock_variables(char *str)
 		i++;
 	}
 	if (string)
+	{
 		variables = ft_split(string, ' ');
+		free(string);
+	}
 	return (variables);
 }
 
@@ -184,7 +209,7 @@ char *illuminate_variables(char *str, t_list *var_env, char **vars)
 		i++;
 	}
 	free(str);
-	return (ft_strdup(new));
+	return (new);
 }
 
 void free_parsing(t_partition **partition)

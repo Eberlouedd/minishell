@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:42:35 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/28 22:38:48 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/30 16:58:51 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	main(int argc, char **argv, char **env)
 		add_history(commande);
 		commande = first_transformation(commande, var_env);
 		parse_result = parsing(commande);
+		free(commande);
+		free_parsing(&parse_result);
 	}
 	free(commande);
 	ft_lstclear(&var_env, free);

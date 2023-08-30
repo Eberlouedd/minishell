@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:22:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/28 23:29:51 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:57:05 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,17 @@ char *create_word(char **str, int *tab)
 {
     int i;
     char *word;
-
+    char *buff;
+    
     word = NULL;
     i = 0;
     while (str[i])
     {
         if(tab[i] == 0)
         {
-            word = ft_strjoin(word, supp_quotes(str[i]));
+            buff = supp_quotes(str[i]);
+            word = ft_strjoin(word, buff);
+            free(buff);
             word = ft_strjoin(word, " ");
         }
         i++;
