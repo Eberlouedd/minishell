@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:48:47 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/28 22:11:57 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/31 06:17:16 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char	*first_transformation(char *commande, t_list *var_env);
 int *create_quote_rep(char *str);
 char *add_spaces(char *str);
 char *supp_quotes(char *str);
-int	afflistc(t_commande *var_env);
 void clean_del(char **str);
 char **stock_variables(char *str);
 char *illuminate_variables(char *str, t_list *var_env, char **vars);

@@ -6,11 +6,11 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:59:08 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/30 17:19:43 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/31 06:20:29 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 char *char_to_string(char c)
 {
@@ -87,7 +87,6 @@ int kind_of_quote(char *str, int j)
 
 char **stock_variables(char *str)
 {
-	int *tab;
 	char *string;
 	int i;
 	char **variables;

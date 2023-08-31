@@ -6,11 +6,11 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:15:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/30 16:57:45 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/31 06:19:54 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 char last_character(char *str)
 {
@@ -94,10 +94,8 @@ void clean_del(char **str)
 char	*first_transformation(char *commande, t_list *var_env)
 {
 	char *new;
-	int i;
 	char **vars;
-	
-	i = 0;
+
 	if(ft_strcmp(commande,"") == 0)
 		return "";
 	if (last_character(commande) == '>'

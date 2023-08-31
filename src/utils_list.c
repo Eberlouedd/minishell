@@ -6,11 +6,11 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:23:07 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/15 16:23:08 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/31 06:18:24 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 t_partition	*ft_lstnew_partition(char *part)
 {

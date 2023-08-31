@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   add_spaces.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skhali <skhali@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:22:37 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/22 01:48:49 by skhali           ###   ########.fr       */
+/*   Updated: 2023/08/31 06:18:11 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 int *create_quote_rep(char *str)
 {
@@ -113,9 +113,9 @@ char *add_spaces(char *str)
 		if((str[i] == '>'
         || str[i] == '<') && str[i+1] != '>' && str[i+1] != '<'
         && quotes[i] != 0
-        && str[i + 1] != ' '
+        && (str[i + 1] != ' '
         || ((str[i + 1] == '>' || str[i + 1] == '<') && str[i] != '>'
-        && str[i] != '<' && str[i] != ' ' && quotes[i + 1] != 0))
+        && str[i] != '<' && str[i] != ' ' && quotes[i + 1] != 0)))
         {
             tab_spaces = create_add_space(tab_spaces, 0, c);
             c++;
