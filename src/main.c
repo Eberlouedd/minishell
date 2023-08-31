@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:42:35 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 06:17:59 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:08:41 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	afflist(t_partition *var_env)
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*commande;
-	t_list	*var_env;
-	char **path;
-	t_partition *parse_result;
-	
+	char		*commande;
+	t_list		*var_env;
+	char		**path;
+	t_partition	*parse_result;
+
 	(void)argc;
 	(void)argv;
 	var_env = initialized_env(env);
@@ -51,11 +51,11 @@ int	main(int argc, char **argv, char **env)
 		commande = first_transformation(commande, var_env);
 		parse_result = parsing(commande);
 		free(commande);
-		free_parsing(&parse_result);
+		if (parse_result)
+			free_parsing(&parse_result);
 	}
 	free(commande);
 	ft_lstclear(&var_env, free);
 	free_double_char(path);
-	free_parsing(&parse_result);
 	return (0);
 }

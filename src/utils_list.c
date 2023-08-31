@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:23:07 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 06:18:24 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:26:36 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 t_partition	*ft_lstnew_partition(char *part)
 {
 	t_partition	*liste;
-    t_commande *c;
-	
+	t_commande	*c;
+
 	liste = malloc(sizeof(t_list));
-    c = create_lstcmd(part);
+	c = create_lstcmd(part);
 	if (!liste || !c)
 		return (NULL);
 	liste->cmds = c;
@@ -48,4 +48,26 @@ void	ft_lstadd_back_partition(t_partition **lst, t_partition *new)
 	}
 	last = ft_lstlast_partition(*lst);
 	last->next = new;
+}
+
+int	*create_type_table(char **div, int *tab)
+{
+	int	i;
+
+	i = 0;
+	while (div[i])
+	{
+		if (ft_strcmp(div[i], ">") == 0)
+			case_tab(tab, &i, 1);
+		else if (ft_strcmp(div[i], "<") == 0)
+			case_tab(tab, &i, 2);
+		else if (ft_strcmp(div[i], "<<") == 0)
+			case_tab(tab, &i, 3);
+		else if (ft_strcmp(div[i], ">>") == 0)
+			case_tab(tab, &i, 4);
+		else
+			tab[i] = WORD;
+		i++;
+	}
+	return (tab);
 }

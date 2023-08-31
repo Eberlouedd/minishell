@@ -6,78 +6,23 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:59:08 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 06:20:29 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:32:54 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char *char_to_string(char c)
+int	kind_of_quote(char *str, int j)
 {
-	char *string;
-
-	string = malloc(2);
-	string[0] = c;
-	string[1] = '\0';
-	return (string);
-}
-
-char *join_char(char *s1, char c)
-{
-	char	*new_chain;
-	int		i;
-
-	i = 0;
-	if (!s1)
-		return (char_to_string(c));
-	new_chain = malloc(ft_strlen(s1) + 1 + 1);
-	if (!new_chain)
-		return (NULL);
-	new_chain[ft_strlen(s1) + 1] = '\0';
-	while (i < ft_strlen(s1))
-	{
-		new_chain[i] = s1[i];
-		i++;
-	}
-	new_chain[i] = c;
-	free(s1);
-	return (new_chain);
-}
-
-void variable(char *str, int *i, char **new)
-{
-	int c;
-
-	c = 1;
-	if (!str[*i + c])
-		return ;
-	if  (str[*i + c] == '$')
-	{
-		*new = ft_strjoin(*new, "$ ");
-		*i = *i + 1;
-	}
-	else
-	{
-		while(str[*i + c] && (ft_isalpha(str[*i + c]) || str[*i + c] == '_'))
-		{
-			*new = join_char(*new, str[*i + c]);
-			c++;
-		}
-		*new = ft_strjoin(*new, " ");
-	}
-}
-
-int kind_of_quote(char *str, int j)
-{
-	int *tab;
+	int	*tab;
 
 	tab = create_quote_rep(str);
 	if (tab[j] == 0)
 	{
 		while (j < ft_strlen(str))
 		{
-			if(tab[j] == 2 || tab[j] == 3)
-				return tab[j];
+			if (tab[j] == 2 || tab[j] == 3)
+				return (tab[j]);
 			j++;
 		}
 	}
@@ -85,18 +30,18 @@ int kind_of_quote(char *str, int j)
 	return (0);
 }
 
-char **stock_variables(char *str)
+char	**stock_variables(char *str)
 {
-	char *string;
-	int i;
-	char **variables;
+	char	*string;
+	int		i;
+	char	**variables;
 
 	string = NULL;
 	variables = NULL;
 	i = 0;
 	while (str[i])
 	{
-		if(str[i] == '$' && kind_of_quote(str, i) != 2)
+		if (str[i] == '$' && kind_of_quote(str, i) != 2)
 			variable(str, &i, &string);
 		i++;
 	}
@@ -108,29 +53,28 @@ char **stock_variables(char *str)
 	return (variables);
 }
 
-int count_char(char **vars, t_list *var_env)
+int	count_char(char **vars, t_list *var_env)
 {
-	int res;
-	int len_var;
-	int i;
-	t_list *buff;
-	char *pid;
+	int		res;
+	int		len_var;
+	int		i;
+	t_list	*buff;
+	char	*pid;
 
 	i = 0;
 	res = 0;
 	len_var = 0;
 	buff = var_env;
 	pid = ft_itoa(getpid());
-
 	while (vars[i])
 	{
 		if (!ft_strcmp(vars[i], "$"))
 			res += ft_strlen(pid);
 		else
 		{
-			while(var_env)
+			while (var_env)
 			{
-				if(!ft_strcmp(vars[i],var_env->name))
+				if (!ft_strcmp(vars[i], var_env->name))
 					res += ft_strlen(var_env->content);
 				var_env = var_env->next;
 			}
@@ -140,19 +84,19 @@ int count_char(char **vars, t_list *var_env)
 		i++;
 	}
 	free(pid);
-	return res - len_var;
+	return (res - len_var);
 }
 
-void replace_content(char *var, t_list *var_env, char *new, int *i)
+void	replace_content(char *var, t_list *var_env, char *new, int *i)
 {
-	int c;
-	char *pid;
+	int		c;
+	char	*pid;
 
 	c = 0;
 	pid = ft_itoa(getpid());
 	if (!ft_strcmp(var, "$"))
 	{
-		while(pid[c])
+		while (pid[c])
 		{
 			new[*i + c] = pid[c];
 			c++;
@@ -160,16 +104,16 @@ void replace_content(char *var, t_list *var_env, char *new, int *i)
 		*i = *i + c - 1;
 		return ;
 	}
-	while(var_env)
+	while (var_env)
 	{
-		if(!ft_strcmp(var,var_env->name))
+		if (!ft_strcmp(var, var_env->name))
 		{
-			while(var_env->content[c])
+			while (var_env->content[c])
 			{
 				new[*i + c] = var_env->content[c];
 				c++;
 			}
-			break;
+			break ;
 		}
 		var_env = var_env->next;
 	}
@@ -177,24 +121,23 @@ void replace_content(char *var, t_list *var_env, char *new, int *i)
 	free(pid);
 }
 
-
-char *illuminate_variables(char *str, t_list *var_env, char **vars)
+char	*illuminate_variables(char *str, t_list *var_env, char **vars)
 {
-	char *new;
-	int i;
-	int j;
-	int c;
+	char	*new;
+	int		i;
+	int		j;
+	int		c;
 
 	j = 0;
 	i = 0;
 	c = 0;
-	if(!vars)
-		return(ft_strdup(str));
+	if (!vars)
+		return (ft_strdup(str));
 	new = malloc(ft_strlen(str) + count_char(vars, var_env) + 1);
 	new[ft_strlen(str) + count_char(vars, var_env)] = '\0';
 	while (i < ft_strlen(str) + count_char(vars, var_env))
 	{
-		if(str[j] == '$' && kind_of_quote(str, j) != 2 && vars[c])
+		if (str[j] == '$' && kind_of_quote(str, j) != 2 && vars[c])
 		{
 			replace_content(vars[c], var_env, new, &i);
 			j += ft_strlen(vars[c]) + 1;
@@ -207,30 +150,5 @@ char *illuminate_variables(char *str, t_list *var_env, char **vars)
 		}
 		i++;
 	}
-	free(str);
-	return (new);
-}
-
-void free_parsing(t_partition **partition)
-{
-	t_partition *buff;
-	t_commande *buff_cmd;
-
-	while ((*partition))
-	{
-		buff = (*partition)->next;
-		while((*partition)->cmds)
-		{
-			buff_cmd = (*partition)->cmds->next;
-			free((*partition)->cmds->cmd);
-			if((*partition)->cmds->cmds_split)
-				free_double_char((*partition)->cmds->cmds_split);
-			free((*partition)->cmds);
-			(*partition)->cmds = buff_cmd;
-		}
-		(*partition)->cmds = NULL;
-		free(*partition);
-		(*partition) = buff;
-	}
-	(*partition) = NULL;
+	return (free(str), new);
 }

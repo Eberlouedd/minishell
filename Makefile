@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/08/31 14:24:36 by kyacini           #+#    #+#              #
+#    Updated: 2023/08/31 15:38:48 by kyacini          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SRC =	src/add_spaces.c \
 		src/list_cmd.c \
 		src/main.c \
@@ -7,6 +19,7 @@ SRC =	src/add_spaces.c \
 		src/quotes_b.c \
 		src/parsing.c \
 		src/variables.c \
+		src/utils_var.c \
 
 OBJS =	objs/add_spaces.o \
 		objs/list_cmd.o\
@@ -17,6 +30,7 @@ OBJS =	objs/add_spaces.o \
 		objs/quotes_b.o \
 		objs/parsing.o \
 		objs/variables.o \
+		objs/utils_var.o \
 
 NAME = minishell
 
@@ -39,8 +53,8 @@ objs/%.o : src/%.c
 %.o : %.c
 	$(CC)  -I${INC} -c $< -o $@ ${CFLAGS}  -lreadline
 
-${NAME} : ${OBJS} $(LIB)
-	make bonus -C ./libft
+${NAME} : ${OBJS}
+	make -C ./libft bonus
 	$(CC) ${OBJS} -o ${NAME} ${LIB} ${CFLAGS} -lreadline
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:53:03 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/30 17:50:57 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/08/31 14:27:58 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	j = 0;
 	if (!s1)
 		return (ft_strdup2(s2));
-	printf("test, buff [%s]", s2);
 	new_chain = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!new_chain)
 		return (NULL);
 	new_chain[ft_strlen(s1) + ft_strlen(s2)] = '\0';
-	printf("second buff [%s]\n", s2);
 	while (j < ft_strlen(s2) || (s2[0] == '\0' && j <= ft_strlen(s2)))
 	{
 		while (i < ft_strlen(s1))
@@ -64,7 +62,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 		j++;
 	}
-	printf("third buff [%s]\n", s2);
 	free(s1);
 	return (new_chain);
 }
