@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 12:24:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 15:21:42 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/01 19:09:48 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,27 +79,19 @@ char	*supp_quotes(char *str)
 
 	i = 0;
 	c = 0;
+	quotes = create_quote_rep(str);
 	if (!have_quotes(str))
 		return (ft_strdup(str));
-	quotes = create_quote_rep(str);
 	while (i < ft_strlen(str))
 	{
-		if (quotes[i] == 2)
+		if (quotes[i] == 2 || quotes[i] == 3)
 			c++;
 		i++;
 	}
 	new = malloc(ft_strlen(str) - c + 1);
+	if (!new)
+		return (free(quotes), free(str), NULL);
 	new[ft_strlen(str) - c] = '\0';
-	i = 0;
-	c = 0;
-	while (str[i])
-	{
-		if (quotes[i] != 2)
-		{
-			new[c] = str[i];
-			c++;
-		}
-		i++;
-	}
+	fill_tab(str, quotes, new);
 	return (free(quotes), free(str), new);
 }

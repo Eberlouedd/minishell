@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:59:08 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 15:32:54 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/01 20:22:14 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ int	count_char(char **vars, t_list *var_env)
 		len_var += ft_strlen(vars[i]) + 1;
 		i++;
 	}
-	free(pid);
-	return (res - len_var);
+	return (free(pid), res - len_var);
 }
 
 void	replace_content(char *var, t_list *var_env, char *new, int *i)
@@ -134,6 +133,8 @@ char	*illuminate_variables(char *str, t_list *var_env, char **vars)
 	if (!vars)
 		return (ft_strdup(str));
 	new = malloc(ft_strlen(str) + count_char(vars, var_env) + 1);
+	if (!new)
+		return (NULL);
 	new[ft_strlen(str) + count_char(vars, var_env)] = '\0';
 	while (i < ft_strlen(str) + count_char(vars, var_env))
 	{

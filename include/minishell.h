@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:48:47 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 15:37:54 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/01 18:42:12 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ char			*join_char(char *s1, char c);
 int				count_char(char **vars, t_list *var_env);
 void			variable(char *str, int *i, char **new);
 void			case_tab(int *tab, int *i, int type);
+void			fill_tab(char *str, int *quotes, char *new);
 
 #endif

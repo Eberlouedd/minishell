@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:22:37 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 15:26:05 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/01 19:58:15 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	*create_quote_rep(char *str)
 	switch_b = 0;
 	switch_a = 0;
 	ret = malloc(ft_strlen(str) * sizeof(int));
+	if (!ret)
+		return (NULL);
 	while (str[i])
 	{
 		if (str[i] == '\"' && switch_b && !switch_a)
@@ -61,6 +63,8 @@ int	*create_add_space(int *tab, int position, int size)
 
 	i = 0;
 	ret = malloc((size + 1) * sizeof(int));
+	if (!ret)
+		return (free(tab), NULL);
 	while (i < size)
 	{
 		ret[i] = tab[i];
@@ -80,6 +84,8 @@ char	*add_final(char *str, int *tab, int size)
 	i = 0;
 	j = 0;
 	new = malloc((size + 1) * sizeof(int));
+	if (!new)
+		return (free(str), NULL);
 	new[size] = '\0';
 	while (i < size)
 	{
@@ -105,17 +111,17 @@ char	*add_spaces(char *str)
 
 	i = 0;
 	c = 0;
-	quotes = create_quote_rep(str);
 	tab_spaces = malloc(1 * sizeof(int));
+	if (!tab_spaces)
+		return (NULL);
+	quotes = create_quote_rep(str);
 	tab_spaces[0] = 0;
 	while (str[i])
 	{
-		if ((str[i] == '>'
-				|| str[i] == '<') && str[i + 1] != '>' && str[i + 1] != '<'
-			&& quotes[i] != 0
-			&& (str[i + 1] != ' '
-				|| ((str[i + 1] == '>' || str[i + 1] == '<') && str[i] != '>'
-					&& str[i] != '<' && str[i] != ' ' && quotes[i + 1] != 0)))
+		if (((str[i] == '>' || str[i] == '<') && str[i + 1] != '>'
+		&& str[i + 1] != '<' && quotes[i] != 0 && str[i + 1] != ' ')
+		|| ((str[i + 1] == '>' || str[i + 1] == '<') && str[i] != '>'
+		&& str[i] != '<' && str[i] != ' ' && quotes[i + 1] != 0))
 		{
 			tab_spaces = create_add_space(tab_spaces, 0, c);
 			c++;

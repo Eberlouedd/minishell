@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:42:35 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 15:08:41 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/01 20:40:42 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,23 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		commande = readline("minishell> ");
-		if (!ft_strcmp(commande, "oui"))
+		if (!ft_strcmp(commande, "oui")){
+			rl_clear_history();
 			break ;
+		}
 		add_history(commande);
 		commande = first_transformation(commande, var_env);
 		parse_result = parsing(commande);
+		afflist(parse_result);
 		free(commande);
-		if (parse_result)
-			free_parsing(&parse_result);
+		free_parsing(&parse_result);
 	}
 	free(commande);
 	ft_lstclear(&var_env, free);
 	free_double_char(path);
 	return (0);
 }
+
+//"'"hello'"'"
+//$(PATH)
+//$"$PATH"

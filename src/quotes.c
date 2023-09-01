@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:15:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 15:19:30 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/01 20:27:37 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ char	*first_transformation(char *commande, t_list *var_env)
 	{
 		printf("error\n");
 		free(commande);
-		return ("");
 	}
 	new = add_spaces(commande);
 	vars = stock_variables(new);

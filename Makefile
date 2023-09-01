@@ -6,7 +6,7 @@
 #    By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/31 14:24:36 by kyacini           #+#    #+#              #
-#    Updated: 2023/08/31 15:38:48 by kyacini          ###   ########.fr        #
+#    Updated: 2023/09/01 18:57:47 by kyacini          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC =	src/add_spaces.c \
 		src/parsing.c \
 		src/variables.c \
 		src/utils_var.c \
+		src/split_func.c \
 
 OBJS =	objs/add_spaces.o \
 		objs/list_cmd.o\
@@ -31,6 +32,7 @@ OBJS =	objs/add_spaces.o \
 		objs/parsing.o \
 		objs/variables.o \
 		objs/utils_var.o \
+		objs/split_func.o \
 
 NAME = minishell
 
@@ -51,7 +53,7 @@ objs/%.o : src/%.c
 	$(CC)  -I${INC} -c $< -o $@ ${CFLAGS} -lreadline
 
 %.o : %.c
-	$(CC)  -I${INC} -c $< -o $@ ${CFLAGS}  -lreadline
+	$(CC)  -I${INC} -c $< -o $@ ${CFLAGS} -lreadline
 
 ${NAME} : ${OBJS}
 	make -C ./libft bonus

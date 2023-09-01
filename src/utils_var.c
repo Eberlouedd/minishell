@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:16:29 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 15:33:09 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/01 20:28:37 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,26 @@ void	free_parsing(t_partition **partition)
 {
 	t_partition	*buff;
 	t_commande	*buff_cmd;
-
-	while ((*partition))
+	if(*partition)
 	{
-		buff = (*partition)->next;
-		while ((*partition)->cmds)
+		while ((*partition))
 		{
-			buff_cmd = (*partition)->cmds->next;
-			free((*partition)->cmds->cmd);
-			if ((*partition)->cmds->cmds_split)
-				free_double_char((*partition)->cmds->cmds_split);
-			free((*partition)->cmds);
-			(*partition)->cmds = buff_cmd;
+			buff = (*partition)->next;
+			while ((*partition)->cmds)
+			{
+				buff_cmd = (*partition)->cmds->next;
+				free((*partition)->cmds->cmd);
+				if ((*partition)->cmds->cmds_split)
+					free_double_char((*partition)->cmds->cmds_split);
+				free((*partition)->cmds);
+				(*partition)->cmds = buff_cmd;
+			}
+			(*partition)->cmds = NULL;
+			free(*partition);
+			(*partition) = buff;
 		}
-		(*partition)->cmds = NULL;
-		free(*partition);
-		(*partition) = buff;
+		(*partition) = NULL;
 	}
-	(*partition) = NULL;
 }
 
 char	*char_to_string(char c)
@@ -41,6 +43,8 @@ char	*char_to_string(char c)
 	char	*string;
 
 	string = malloc(2);
+	if (!string)
+		return (NULL);
 	string[0] = c;
 	string[1] = '\0';
 	return (string);
@@ -56,7 +60,7 @@ char	*join_char(char *s1, char c)
 		return (char_to_string(c));
 	new_chain = malloc(ft_strlen(s1) + 1 + 1);
 	if (!new_chain)
-		return (NULL);
+		return (free(s1), NULL);
 	new_chain[ft_strlen(s1) + 1] = '\0';
 	while (i < ft_strlen(s1))
 	{

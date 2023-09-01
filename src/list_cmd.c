@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:22:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 15:23:14 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/01 18:08:08 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_commande	*create_lstcmd(char *str)
 	while (div[i])
 		i++;
 	tab = malloc(i * sizeof(int));
+	if (!tab)
+		return (free_double_char(div), NULL);
 	create_type_table(div, tab);
 	c = ft_lst_newcmd(create_word(div, tab), 0);
 	i = 0;
