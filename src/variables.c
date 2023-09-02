@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:59:08 by kyacini           #+#    #+#             */
-/*   Updated: 2023/09/01 20:22:14 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/02 15:01:16 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,15 @@ int	count_char(char **vars, t_list *var_env)
 	t_list	*buff;
 	char	*pid;
 
-	i = 0;
-	res = 0;
-	len_var = 0;
+	pid = NULL;
+	init_vars_count(&i, &res, &len_var, &pid);
 	buff = var_env;
-	pid = ft_itoa(getpid());
 	while (vars[i])
 	{
 		if (!ft_strcmp(vars[i], "$"))
 			res += ft_strlen(pid);
 		else
-		{
-			while (var_env)
-			{
-				if (!ft_strcmp(vars[i], var_env->name))
-					res += ft_strlen(var_env->content);
-				var_env = var_env->next;
-			}
-		}
+			add_var_len(vars[i], var_env, &res);
 		var_env = buff;
 		len_var += ft_strlen(vars[i]) + 1;
 		i++;
@@ -127,9 +118,7 @@ char	*illuminate_variables(char *str, t_list *var_env, char **vars)
 	int		j;
 	int		c;
 
-	j = 0;
-	i = 0;
-	c = 0;
+	init_var_illum(&i, &j, &c);
 	if (!vars)
 		return (ft_strdup(str));
 	new = malloc(ft_strlen(str) + count_char(vars, var_env) + 1);
@@ -145,10 +134,7 @@ char	*illuminate_variables(char *str, t_list *var_env, char **vars)
 			c++;
 		}
 		else
-		{
-			new[i] = str[j];
-			j++;
-		}
+			affect_casu_char(&new[i], str[j], &j);
 		i++;
 	}
 	return (free(str), new);

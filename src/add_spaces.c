@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:22:37 by kyacini           #+#    #+#             */
-/*   Updated: 2023/09/01 19:58:15 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/02 13:51:43 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,19 @@ int	*create_quote_rep(char *str)
 	int	switch_b;
 	int	switch_a;
 
-	i = 0;
-	switch_b = 0;
-	switch_a = 0;
-	ret = malloc(ft_strlen(str) * sizeof(int));
+	ret = init_var_createquote(&switch_a, &switch_b, &i, str);
 	if (!ret)
 		return (NULL);
 	while (str[i])
 	{
 		if (str[i] == '\"' && switch_b && !switch_a)
-		{
-			switch_b = 0;
-			ret[i] = 3;
-		}
+			fill_quote_tab(&ret[i], &switch_b, 0, 3);
 		else if (str[i] == '\"' && !switch_b && !switch_a)
-		{
-			switch_b = 1;
-			ret[i] = 3;
-		}
+			fill_quote_tab(&ret[i], &switch_b, 1, 3);
 		else if (str[i] == '\'' && switch_a && !switch_b)
-		{
-			switch_a = 0;
-			ret[i] = 2;
-		}
+			fill_quote_tab(&ret[i], &switch_a, 0, 2);
 		else if (str[i] == '\'' && !switch_a && !switch_b)
-		{
-			switch_a = 1;
-			ret[i] = 2;
-		}
+			fill_quote_tab(&ret[i], &switch_a, 0, 2);
 		else if (switch_a || switch_b)
 			ret[i] = 0;
 		else
@@ -64,7 +49,7 @@ int	*create_add_space(int *tab, int position, int size)
 	i = 0;
 	ret = malloc((size + 1) * sizeof(int));
 	if (!ret)
-		return (free(tab), NULL);
+		return (NULL);
 	while (i < size)
 	{
 		ret[i] = tab[i];
@@ -75,7 +60,7 @@ int	*create_add_space(int *tab, int position, int size)
 	return (ret);
 }
 
-char	*add_final(char *str, int *tab, int size)
+char	*add_final(char *str, int *tab, int size, int *quotes)
 {
 	char	*new;
 	int		i;
@@ -98,8 +83,7 @@ char	*add_final(char *str, int *tab, int size)
 		}
 		i++;
 	}
-	free(str);
-	return (new);
+	return (free(str), free(tab), free(quotes), new);
 }
 
 char	*add_spaces(char *str)
@@ -109,34 +93,24 @@ char	*add_spaces(char *str)
 	int	*quotes;
 	int	c;
 
-	i = 0;
-	c = 0;
 	tab_spaces = malloc(1 * sizeof(int));
 	if (!tab_spaces)
 		return (NULL);
+	init_var_addspace(&i, &c, tab_spaces);
 	quotes = create_quote_rep(str);
-	tab_spaces[0] = 0;
 	while (str[i])
 	{
 		if (((str[i] == '>' || str[i] == '<') && str[i + 1] != '>'
 		&& str[i + 1] != '<' && quotes[i] != 0 && str[i + 1] != ' ')
 		|| ((str[i + 1] == '>' || str[i + 1] == '<') && str[i] != '>'
 		&& str[i] != '<' && str[i] != ' ' && quotes[i + 1] != 0))
-		{
-			tab_spaces = create_add_space(tab_spaces, 0, c);
-			c++;
-			tab_spaces = create_add_space(tab_spaces, 1, c);
-		}
+			new_tab_with_spaces(&tab_spaces, &c);
 		else
 			tab_spaces = create_add_space(tab_spaces, 0, c);
 		i++;
 		c++;
 	}
 	if (c > 0)
-	{
-		str = add_final(str, tab_spaces, c);
-		free(tab_spaces);
-		free(quotes);
-	}
+		str = add_final(str, tab_spaces, c, quotes);
 	return (ft_strdup(str));
 }

@@ -6,7 +6,7 @@
 #    By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/31 14:24:36 by kyacini           #+#    #+#              #
-#    Updated: 2023/09/01 18:57:47 by kyacini          ###   ########.fr        #
+#    Updated: 2023/09/02 14:29:33 by kyacini          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC =	src/add_spaces.c \
 		src/variables.c \
 		src/utils_var.c \
 		src/split_func.c \
+		src/split_func_b.c \
 
 OBJS =	objs/add_spaces.o \
 		objs/list_cmd.o\
@@ -33,6 +34,7 @@ OBJS =	objs/add_spaces.o \
 		objs/variables.o \
 		objs/utils_var.o \
 		objs/split_func.o \
+		objs/split_func_b.o \
 
 NAME = minishell
 
