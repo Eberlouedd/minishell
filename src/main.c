@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:42:35 by kyacini           #+#    #+#             */
-/*   Updated: 2023/09/01 20:40:42 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/05 20:37:25 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	main(int argc, char **argv, char **env)
 		commande = first_transformation(commande, var_env);
 		parse_result = parsing(commande);
 		afflist(parse_result);
-		free(commande);
+		if (commande)
+			free(commande);
 		free_parsing(&parse_result);
 	}
 	free(commande);
@@ -61,7 +62,6 @@ int	main(int argc, char **argv, char **env)
 	free_double_char(path);
 	return (0);
 }
-
-//"'"hello'"'"
-//$(PATH)
-//$"$PATH"
+// $?
+// supp $$
+// ""

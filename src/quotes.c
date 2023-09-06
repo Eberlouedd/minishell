@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 10:15:21 by kyacini           #+#    #+#             */
-/*   Updated: 2023/09/01 20:27:37 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/05 19:50:52 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,6 @@ char	last_character(char *str)
 		i++;
 	}
 	return (str[c]);
-}
-
-int	test_quotes(char *str)
-{
-	int	i;
-	int	c;
-	int	j;
-
-	i = 0;
-	c = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] == '\'')
-			c++;
-		i++;
-	}
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\"')
-			j++;
-		i++;
-	}
-	if (c % 2 != 0 && j % 2 != 0)
-		return (0);
-	return (1);
 }
 
 void	splitable(char *str)
@@ -96,21 +69,29 @@ char	*first_transformation(char *commande, t_list *var_env)
 	char	*new;
 	char	**vars;
 
+	new = NULL;
 	if (ft_strcmp(commande, "") == 0)
 		return ("");
 	if (last_character(commande) == '>'
 		|| last_character(commande) == '<'
-		|| !test_quotes(commande)
 		|| !check_unique(commande))
 	{
 		printf("error\n");
 		free(commande);
+		return (NULL);
 	}
 	new = add_spaces(commande);
 	vars = stock_variables(new);
 	new = illuminate_variables(new, var_env, vars);
 	if (vars)
 		free_double_char(vars);
+	if (last_character(new) == '>'
+		|| last_character(new) == '<')
+	{
+		printf("error\n");
+		free(new);
+		return (NULL);
+	}
 	splitable(new);
 	return (new);
 }

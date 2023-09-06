@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:22:37 by kyacini           #+#    #+#             */
-/*   Updated: 2023/09/02 13:51:43 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/05 20:30:19 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int	*create_quote_rep(char *str)
 		else if (str[i] == '\'' && switch_a && !switch_b)
 			fill_quote_tab(&ret[i], &switch_a, 0, 2);
 		else if (str[i] == '\'' && !switch_a && !switch_b)
-			fill_quote_tab(&ret[i], &switch_a, 0, 2);
+			fill_quote_tab(&ret[i], &switch_a, 1, 2);
 		else if (switch_a || switch_b)
 			ret[i] = 0;
 		else
 			ret[i] = 1;
 		i++;
 	}
-	return (ret);
+	return (ret[i] = 4, ret);
 }
 
 int	*create_add_space(int *tab, int position, int size)

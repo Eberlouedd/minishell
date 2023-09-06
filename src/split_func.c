@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 18:33:41 by kyacini           #+#    #+#             */
-/*   Updated: 2023/09/02 14:29:15 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/05 20:30:28 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	*init_var_createquote(int *a, int *b, int *i, char *str)
 	*a = 0;
 	*b = 0;
 	*i = 0;
-	new = malloc(ft_strlen(str) * sizeof(int));
+	new = malloc((ft_strlen(str) + 1) * sizeof(int));
+	if (!new)
+		return (NULL);
 	return (new);
 }

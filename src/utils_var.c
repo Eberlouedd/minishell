@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:16:29 by kyacini           #+#    #+#             */
-/*   Updated: 2023/09/01 20:28:37 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/05 19:51:44 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	free_parsing(t_partition **partition)
 {
 	t_partition	*buff;
 	t_commande	*buff_cmd;
+
 	if(*partition)
 	{
 		while ((*partition))

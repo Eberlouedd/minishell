@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:22:50 by kyacini           #+#    #+#             */
-/*   Updated: 2023/08/31 15:23:00 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/05 20:00:18 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_partition	*parsing(char *line)
 	char		**partitions;
 	t_partition	*part;
 
-	if (!ft_strcmp(line, ""))
+	if (!line || !ft_strcmp(line, ""))
 		return (NULL);
 	partitions = ft_split(line, '|');
 	part = create_partition(partitions);

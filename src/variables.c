@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 16:59:08 by kyacini           #+#    #+#             */
-/*   Updated: 2023/09/02 15:01:16 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/05 19:46:09 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	count_char(char **vars, t_list *var_env)
 	t_list	*buff;
 	char	*pid;
 
-	pid = NULL;
 	init_vars_count(&i, &res, &len_var, &pid);
 	buff = var_env;
 	while (vars[i])
@@ -127,7 +126,7 @@ char	*illuminate_variables(char *str, t_list *var_env, char **vars)
 	new[ft_strlen(str) + count_char(vars, var_env)] = '\0';
 	while (i < ft_strlen(str) + count_char(vars, var_env))
 	{
-		if (str[j] == '$' && kind_of_quote(str, j) != 2 && vars[c])
+		if (str[j] == '$' && kind_of_quote(str, j) != 2 && vars[c] && (ft_isalpha(str[j + 1]) || str[j + 1] == '_' || str[j + 1] == '$'))
 		{
 			replace_content(vars[c], var_env, new, &i);
 			j += ft_strlen(vars[c]) + 1;
