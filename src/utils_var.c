@@ -6,7 +6,7 @@
 /*   By: kyacini <kyacini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:16:29 by kyacini           #+#    #+#             */
-/*   Updated: 2023/09/05 19:51:44 by kyacini          ###   ########.fr       */
+/*   Updated: 2023/09/11 01:56:51 by kyacini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,10 @@ void	variable(char *str, int *i, char **new)
 	c = 1;
 	if (!str[*i + c])
 		return ;
-	if (str[*i + c] == '$')
+	if (!ft_isalpha(str[*i + c]) && (str[*i + c] != '_'))
 	{
-		*new = ft_strjoin(*new, "$ ");
+		*new = join_char(*new, str[*i + c]);
+		*new = ft_strjoin(*new, " ");
 		*i = *i + 1;
 	}
 	else
